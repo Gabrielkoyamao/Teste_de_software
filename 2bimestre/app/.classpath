@@ -7,7 +7,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/dev/Documents/_fatec/testeDeSoftware/2bimestre/app/libs/calculador_aluguel_lib.jar">
+	<classpathentry kind="lib" path="/home/dev/fatec/TesteDeSoftware/2bimestre/app/libs/calculador_aluguel_lib.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
