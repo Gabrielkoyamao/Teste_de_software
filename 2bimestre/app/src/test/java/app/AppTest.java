@@ -4,20 +4,29 @@
 package app;
 
 import model.CalculadorAluguel;
-import modelo.Calc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assert.assertFalse;
+//import static org.junit.Assert.assertNull;
+//import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
+//import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.TestInstance;
+//import org.junit.jupiter.api.TestInstance.Lifecycle;
+//import org.junit.jupiter.params.ParameterizedTest;
+//import org.junit.jupiter.params.provider.CsvFileSource;
+//import org.junit.jupiter.params.provider.CsvSource;
+//import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 	
-class AppTest {    
-
+class AppTest {
+	verificaAutenticacao verify = new verificaAutenticacao();
 	CalculadorAluguel aluguel = new CalculadorAluguel(500);
 	
 //	dia 0 - value: 0, result: -1 
@@ -28,11 +37,28 @@ class AppTest {
 //	dia 5 - value: 5, result: 450
 //	dia 6 - value: 6, result: 475
 	
-	@ParameterizedTest
+	@ParameterizedTest()
 	@CsvSource(value={"0:-1", "1:450", "2:450", "3:450", "4:450", "5:450", "6:475"}, delimiter = ':')
-	public void dia0(int value, int res){
+	public void dia00(int value, int res){
 	    assertEquals(res, aluguel.calcAluguel(value));
 	}
 	
 	
+	@ParameterizedTest(name="Teste {index} => x={0} y={1}, resultado={2}")
+	@CsvFileSource(resources="/valoresTestes.csv", delimiter=':')
+	public void dia0(int value, int res){
+	    assertEquals(res, aluguel.calcAluguel(value));
+	}
+	
+	@RepeatedTest(3)
+	public void autenticarTestBloqueio(RepetitionInfo repetitionInfo) { 
+		 
+		assertFalse(verify.checkStr("1234"));
+//		assertTrue(true);
+		
+		if(repetitionInfo.getCurrentRepetition() >= 3) {
+			assertTrue(verify.estaBloqueado());
+		}
+	}
 }
+
