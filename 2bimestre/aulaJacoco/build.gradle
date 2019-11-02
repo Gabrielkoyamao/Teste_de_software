@@ -33,9 +33,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.3.1'
-
-    runtime files('libs/calculador_aluguel_lib.jar')
-    compile fileTree(dir: 'libs', include:'*.jar')
 }
 
 
@@ -49,10 +46,6 @@ jacocoTestReport {
 	}
 }
 
-application {
-    // Define the main class for the application
-    mainClassName = 'app.App'
-}
 
 test {
     // Use junit platform for unit tests
